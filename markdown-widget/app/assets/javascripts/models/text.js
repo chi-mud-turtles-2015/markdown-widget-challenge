@@ -10,6 +10,9 @@ Text.prototype = {
     if (char == 16) {
       return '';
     }
+    if (char == 32) {
+      return ' ';
+    }
     if (char == 8) {
       return 'backspace';
     }
@@ -42,6 +45,7 @@ Text.prototype = {
         }
       }
       else if (char == 189) {
+        this.starCount = 0;
         this.special = true;
         this.italics = !this.italics;
         if (this.italics === true) {

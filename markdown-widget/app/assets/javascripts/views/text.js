@@ -9,15 +9,13 @@ TextView.prototype = {
       var charCode = event.which;
       var shift = event.shiftKey;
       that.checkChar(charCode, shift);
-      that.checkText();
+      // that.checkText();
     });
   },
 
   checkChar: function(char, shift) {
     str = this.model.checkSpecialChar(char,shift);
     var selector = $('.markdown');
-    console.log(shift);
-    console.log(char);
     if (this.model.special === false) {
       if (this.model.bold === true) {
         selector = $('.markdown span:last-child');
