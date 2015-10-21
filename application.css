@@ -1,0 +1,39 @@
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+
+#input-container {
+  float: left;
+  width: 398px;
+  margin-top: 20px;
+}
+
+#preview {
+  float: right;
+  width: 398px;
+  margin-top: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+#input-text {
+  width: 300px;
+  height: 150px;
+  padding: 5px;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+}
+
+p {
+  margin: 0;
+}
