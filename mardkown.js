@@ -19,7 +19,11 @@ MarkdownView.prototype.transformOutput = function(output){
 // }
 MarkdownController.prototype.onKeypress = function( ) {
   this.text.rawText = this.view.getInputContent();
-  this.view.transformOutput(this.text.transformedText());
+  this.text.alteredText = this.text.rawText;
+  this.text.transformedText("**", "strong");
+  this.text.transformedText("*", "em");
+  this.text.transformedText("_", "em");
+  this.view.transformOutput(this.text.alteredText);
 }
 
 function MarkdownController(){
@@ -30,22 +34,25 @@ function MarkdownController(){
 
 function Text(){
   this.rawText = "";
+  this.alteredText = "";
 }
-Text.prototype.transformedText = function(){
-  var splitString = this.rawText.split("**");
+
+Text.prototype.transformedText = function(character, element){
+  var splitString = this.alteredText.split(character);
   var reformattedString = [];
   var  i = 1;
   while (splitString.length > 0) {
     reformattedString.push(splitString.shift());
-    if (i % 2 == 0) {
-      reformattedString.push("</em>");
+    if (i % 2 != 0) {
+      reformattedString.push("<" + element + ">");
       i++;
     } else {
-      reformattedString.push("<em>");
+      reformattedString.push("</" + element + ">");
       i++;
     }
   }
-  console.log(reformattedString);
+  // console.log(reformattedString);
+  this.alteredText = reformattedString.join("");
   return reformattedString.join("");
 }
 
