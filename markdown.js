@@ -15,6 +15,7 @@ MyText.prototype.translate = function() {
 };
 
 $(document).ready(function () {
+  //do we want this in our constructor?
   $('#input').keyup(function () {
     myInput = new MyText($(this).val());
     myInput.translate();
