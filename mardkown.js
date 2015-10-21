@@ -1,7 +1,6 @@
 function MarkdownView(options) {
   this.input = $('input');
   this.display = $('p');
-  // console.log(this.display);
 }
 
 MarkdownView.prototype.bindKeypress = function(callback) {
@@ -13,22 +12,17 @@ MarkdownView.prototype.getInputContent = function (){
 }
 
 MarkdownView.prototype.transformOutput = function(output){
-  this.display.text(output);
+  this.display.html(output);
 }
 // MarkdownView.prototype.getInputBox = function (){
-//   console.log("HELLO");
 //   return this.input;
 // }
-MarkdownController.prototype.onKeypress = function(event) {
-  console.log(this);
-  console.log(event.target);
+MarkdownController.prototype.onKeypress = function( ) {
   this.text.rawText = this.view.getInputContent();
-  console.log("HELLLLLOO");
   this.view.transformOutput(this.text.transformedText());
 }
 
 function MarkdownController(){
-  // console.log("HELLO");
   this.view = new MarkdownView();
   this.text = new Text();
   this.view.bindKeypress(this.onKeypress.bind(this))
@@ -38,7 +32,21 @@ function Text(){
   this.rawText = "";
 }
 Text.prototype.transformedText = function(){
-  return "****" + this.rawText + "****"
+  var splitString = this.rawText.split("**");
+  var reformattedString = [];
+  var  i = 1;
+  while (splitString.length > 0) {
+    reformattedString.push(splitString.shift());
+    if (i % 2 == 0) {
+      reformattedString.push("</em>");
+      i++;
+    } else {
+      reformattedString.push("<em>");
+      i++;
+    }
+  }
+  console.log(reformattedString);
+  return reformattedString.join("");
 }
 
 $(function(){
