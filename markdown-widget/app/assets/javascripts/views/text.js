@@ -16,11 +16,7 @@ TextView.prototype = {
 
   checkChar: function(char, shift) {
     str = this.checkSpecialChar(char,shift);
-    // console.log(str);
     var selector = $('.markdown');
-    // console.log(this.model.special);
-    // console.log(this.model.bold);
-    // console.log(this.model.italics);
     if (this.model.special === false) {
       if (this.model.bold === true) {
         selector = $('.markdown span:last-child');
@@ -36,7 +32,6 @@ TextView.prototype = {
       this.removeMarkdown();
     }
     else {
-      // console.log(selector);
       this.addMarkdown(selector,str);
     }
   },
