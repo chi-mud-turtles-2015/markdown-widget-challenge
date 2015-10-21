@@ -5,7 +5,8 @@ var TextView = function(model){
 
 TextView.prototype = {
   setKeyUpListener: function() {
-    $('#text-input').on("keyup", function(event){
+    $('#text-input').on("keypress", function(event){
+      console.log(event);
       var charCode = event.which;
       var shift = event.shiftKey;
       that.checkChar(charCode, shift);
@@ -25,6 +26,9 @@ TextView.prototype = {
         selector = $('.markdown span:last-child');
       }
       else if (this.model.italics === true) {
+        selector = $('.markdown em:last-child');
+      }
+      else if (this.model.undy_italics === true) {
         selector = $('.markdown em:last-child');
       }
     }
@@ -51,10 +55,10 @@ TextView.prototype = {
       return '<br>';
     }
     if (shift === true) {
-      if (char == 56) {
+      if (char == 42) {
         char = this.doStar(char);
       }
-      else if (char == 189) {
+      else if (char == 95) {
         char = this.doUnderscore(char);
       }
       else {
@@ -66,7 +70,7 @@ TextView.prototype = {
     else {
       this.model.starCount = 0;
       this.model.special = false;
-      if (char == 56 || char == 189) {
+      if (char == 42 || char == 95) {
         return null;
       }
       else {
@@ -78,8 +82,8 @@ TextView.prototype = {
   doUnderscore: function(char) {
     this.model.starCount = 0;
     this.model.special = true;
-    this.model.italics = !this.model.italics;
-    if (this.model.italics === true) {
+    this.model.undy_italics = !this.model.undy_italics;
+    if (this.model.undy_italics === true) {
       return '<em>';
     }
     else {
