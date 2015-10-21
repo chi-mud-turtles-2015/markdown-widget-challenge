@@ -1,29 +1,29 @@
 function MarkdownView(){
   console.log("HELLO");
   this.getInputBox = function (){
-    console.log($("input").val());
     return $("input");
   }
   this.getInputContent = function (){
     return $("input").val();
   }
-  this.transformOutput = function(){
-
+  this.transformOutput = function(output){
+    $("p").text(output);
   }
 }
 
 function MarkdownController(){
   var view = new MarkdownView();
-  var textToTransform = new TransformedText();
+  var text = new Text();
   view.getInputBox().on("keyup", function(){
-    console.log(textToTransform.transform());
+    text.rawText = view.getInputContent();
+    view.transformOutput(text.transformedText());
   });
 }
 
 
-function TransformedText(){
-  this.text = "";
-  this.transform = function(){
-    return "WE TYPED HERE";
+function Text(){
+  this.rawText = "";
+  this.transformedText = function(){
+    return this.rawText + "****";
   }
 }
